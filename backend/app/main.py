@@ -47,10 +47,11 @@ async def root():
 
 @app.get("/api/health")
 async def health():
-    from app.config import SUPABASE_URL, SUPABASE_JWT_SECRET
+    from app.config import SUPABASE_URL, SUPABASE_JWT_SECRET, ALLOWED_ORIGINS
 
     return {
         "status": "ok",
         "supabase_configured": bool(SUPABASE_URL),
         "jwt_secret_configured": bool(SUPABASE_JWT_SECRET),
+        "allowed_origins": ALLOWED_ORIGINS,
     }
