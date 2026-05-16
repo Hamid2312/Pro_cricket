@@ -1,7 +1,9 @@
 // API client — attaches Supabase access token to every /api/* request
 import { supabase } from './supabase'
 
-const BASE = '/api'
+// Use environment variable for backend URL, fallback to relative path for local development
+const API_URL = import.meta.env.VITE_API_URL || ''
+const BASE = API_URL ? `${API_URL}/api` : '/api'
 
 const EMPTY_TEAM_ME = {
   user_id: null,

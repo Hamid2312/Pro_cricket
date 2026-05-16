@@ -24,7 +24,7 @@ if not SUPABASE_JWT_SECRET:
     )
 
 # FRONTEND_ORIGIN: comma-separated list of allowed CORS origins
-FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
+FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173,http://localhost:5174")
 ALLOWED_ORIGINS = [o.strip() for o in FRONTEND_ORIGIN.split(",") if o.strip()]
 
 # anon client — for public reads (respects RLS)
