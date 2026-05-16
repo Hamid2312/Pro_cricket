@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LayoutDashboard, Wallet, CalendarDays, BrainCircuit, Package, Users } from 'lucide-react'
+import { LayoutDashboard, Wallet, CalendarDays, BrainCircuit, Package, Users, User } from 'lucide-react'
 
 const NAV = [
   { to: '/',          Icon: LayoutDashboard, label: 'Home'    },
@@ -9,6 +9,7 @@ const NAV = [
   { to: '/scorer',    Icon: BrainCircuit,    label: 'AI Score'},
   { to: '/inventory', Icon: Package,         label: 'Kit'     },
   { to: '/players',   Icon: Users,           label: 'Squad'   },
+  { to: '/profile',   Icon: User,            label: 'Profile' },
 ]
 
 export default function BottomNav() {

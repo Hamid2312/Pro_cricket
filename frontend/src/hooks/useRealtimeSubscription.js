@@ -2,11 +2,12 @@ import { useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import useAppStore from '../store/useAppStore'
 
-export function useRealtimeSubscription() {
+export function useRealtimeSubscription(session) {
   const { applyDbEvent } = useAppStore()
 
   useEffect(() => {
-    // Listen to changes on multiple tables
+    if (!session) return
+
     const channel = supabase
       .channel('schema-db-changes')
       .on(
@@ -29,10 +30,30 @@ export function useRealtimeSubscription() {
         { event: '*', schema: 'public', table: 'players' },
         (payload) => applyDbEvent('players', payload)
       )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'join_requests' },
+        (payload) => applyDbEvent('join_requests', payload)
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'matches' },
+        (payload) => applyDbEvent('matches', payload)
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'rsvps' },
+        (payload) => applyDbEvent('rsvps', payload)
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'stats' },
+        (payload) => applyDbEvent('stats', payload)
+      )
       .subscribe()
 
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [applyDbEvent])
+  }, [applyDbEvent, session])
 }

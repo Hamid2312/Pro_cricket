@@ -9,7 +9,7 @@ router = APIRouter()
 class InventoryUpdate(BaseModel):
     fresh_balls: Optional[int] = None
     tape_rolls: Optional[int] = None
-    kit_holder_player_id: Optional[str] = None
+    kit_holder_id: Optional[str] = None
 
 
 @router.get("/")
